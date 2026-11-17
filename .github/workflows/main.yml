@@ -19,15 +19,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Setup Android SDK
+      - name: Setup Android SDK and NDK
         uses: android-actions/setup-android@v3
         with:
           accept-android-sdk-licenses: true
-
-      - name: Accept Licenses & Install NDK / CMake
-        run: |
-          yes | sdkmanager --licenses || true
-          sdkmanager "ndk;25.1.8937393" "cmake;3.22.1"
+          packages: 'ndk;25.1.8937393 cmake;3.22.1 platform-tools'
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
@@ -42,4 +38,3 @@ jobs:
         with:
           name: OxideAGS-debug
           path: app/build/outputs/apk/debug/app-debug.apk
-          
